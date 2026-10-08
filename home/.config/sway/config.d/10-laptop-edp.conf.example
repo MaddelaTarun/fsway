@@ -1,0 +1,7 @@
+# Laptop example — rename this file to `10-laptop-edp.conf` to activate.
+# (Only needed to FORCE a mode; sway picks the panel's preferred mode
+#  automatically. Check names/modes with: swaymsg -t get_outputs)
+#
+# output eDP-1 {
+#     mode 1920x1200@60Hz
+# }

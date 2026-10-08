@@ -1,0 +1,14 @@
+# GIMP gimp-heal-tool options
+
+(foreground
+    (color "HSVA float" 16 "\0\0\0\0\0\0\0\0\0\0\200\77\0\0\200\77" 0))
+(background
+    (color "R'G'B'A double" 32 "\0\0\0\140\276\270\350\77\0\0\0\340\347\332\332\77\0\0\0\200\64\26\306\77\0\0\0\0\0\0\360\77" 0))
+(brush "2. Hardness 050")
+(dynamics "Pressure Size")
+(pattern "Pine")
+(palette "Color History")
+(brush-size 17)
+(brush-hardness 0.5)
+
+# end of gimp-heal-tool options

@@ -1,0 +1,13 @@
+[Default Applications]
+text/html=helium.desktop
+x-scheme-handler/http=helium.desktop
+x-scheme-handler/https=helium.desktop
+x-scheme-handler/about=helium.desktop
+x-scheme-handler/unknown=helium.desktop
+x-scheme-handler/discord=vesktop.desktop
+image/jpeg=imv-dir.desktop
+application/pdf=helium.desktop
+
+[Added Associations]
+image/jpeg=imv-dir.desktop;
+application/pdf=helium.desktop;

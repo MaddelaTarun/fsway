@@ -1,0 +1,63 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "height": 30,
+    "spacing": 0,
+
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["cpu", "memory", "battery", "backlight", "pulseaudio", "tray"],
+
+    "sway/workspaces": {
+        "disable-scroll": false,
+        "all-outputs": false,
+        "format": "{name}",
+        "on-click": "activate"
+    },
+
+    "clock": {
+        "format": "{:%I:%M}",
+        "format-alt": "{:%a, %d %b %Y}",
+        "format-alt-click": "click-left",
+        "tooltip-format": "{:%a, %d %b %Y}"
+    },
+
+    "cpu": {
+        "format": "cpu {usage}%",
+        "interval": 2
+    },
+
+    "memory": {
+        "format": "ram {percentage}%",
+        "interval": 2
+    },
+
+    "battery": {
+        "interval": 30,
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "bat {capacity}%",
+        "format-charging": "chg {capacity}%"
+    },
+
+    "backlight": {
+        "format": "{percent}%",
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-"
+    },
+
+    "pulseaudio": {
+        "format": "vol {volume}%",
+        "format-muted": "muted",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    }
+}
+

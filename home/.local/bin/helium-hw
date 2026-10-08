@@ -1,0 +1,29 @@
+#!/bin/sh
+# Helium launcher with hardware video decoding on the Intel iGPU.
+#
+# Points Chromium's GPU/media stack at the Intel render node (stable
+# by-path symlink — the Intel iGPU is always PCI 00:02.0 on both desktops
+# and laptops) and selects the iHD media driver for VA-API decode.
+#
+# On an iGPU-only machine (laptop) this is effectively a no-op — the
+# default GPU is already the Intel — but it keeps working either way.
+# If the render node path is missing, the override is simply skipped.
+
+export LIBVA_DRIVER_NAME=iHD
+
+# --enable-features=AcceleratedVideoDecodeLinuxGL: GL-backed video decode
+# (works with the iHD driver; no NVIDIA anywhere in the chain).
+if [ -e /dev/dri/by-path/pci-0000:00:02.0-render ]; then
+  set -- --render-node-override=/dev/dri/by-path/pci-0000:00:02.0-render "$@"
+fi
+
+exec /usr/bin/helium \
+  --use-gl=angle \
+  --use-angle=gl \
+  --ignore-gpu-blocklist \
+  --enable-zero-copy \
+  --enable-features=AcceleratedVideoDecodeLinuxGL \
+  "$@"
+
+# To revert to stock Helium: delete this file and
+# ~/.local/share/applications/helium.desktop, then relaunch from the menu.

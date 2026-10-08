@@ -1,0 +1,17 @@
+#!/bin/sh
+# sway-intel — pin sway to the Intel iGPU only when an NVIDIA card is
+# present (so sway never grabs the dGPU for display). On iGPU-only
+# machines (laptops) this just runs plain sway.
+IGPU=""
+NVIDIA=""
+for v in /sys/class/drm/card*/device/vendor; do
+    read -r vendor < "$v" 2>/dev/null || continue
+    card=$(basename "$(dirname "$(dirname "$v")")")
+    # only accept bare cardN names (skip connectors like card1-HDMI-A-2)
+    case "${card#card}" in ''|*[!0-9]*) continue ;; esac
+    [ "$vendor" = "0x8086" ] && IGPU=$card
+    [ "$vendor" = "0x10de" ] && NVIDIA=1
+done
+# No NVIDIA (laptop) or no Intel found: plain sway.
+[ -n "$NVIDIA" ] && [ -n "$IGPU" ] || exec sway "$@"
+exec env WLR_DRM_DEVICES="/dev/dri/$IGPU" sway "$@"
